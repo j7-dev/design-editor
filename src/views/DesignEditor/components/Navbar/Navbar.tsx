@@ -26,9 +26,8 @@ const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
 
 const Navbar = () => {
   const { setScenes, setCurrentDesign, currentDesign, scenes } = useDesignEditorContext()
-  const editorType = useEditorType("GRAPHIC")
+  const editorType = useEditorType()
   const editor = useEditor()
-  console.log("🚀 ~ file: Navbar.tsx:31 ~ Navbar ~ editorType:", editorType)
   const inputFileRef = React.useRef<HTMLInputElement>(null)
 
   const parseGraphicJSON = () => {

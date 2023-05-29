@@ -11,7 +11,7 @@ interface State {
 }
 
 const DesignTitle = () => {
-  const [state, setState] = React.useState<State>({ name: "My first design.", width: 0 })
+  const [state, setState] = React.useState<State>({ name: "My first design.", width: 100 })
   const { currentDesign, setCurrentDesign } = useDesignEditorContext()
   const inputTitleRef = React.useRef<Input>(null)
   const spanRef = React.useRef<HTMLDivElement | null>(null)
@@ -52,6 +52,7 @@ const DesignTitle = () => {
             left: "50%",
             fontSize: "14px",
             fontWeight: 500,
+            minWidth: "100px",
           }}
           ref={spanRef}
         >
