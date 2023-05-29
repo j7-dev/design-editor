@@ -14,6 +14,8 @@ import { loadVideoEditorAssets } from "~/utils/video"
 import DesignTitle from "./DesignTitle"
 import { IDesign } from "~/interfaces/DesignEditor"
 import Github from "~/components/Icons/Github"
+import { BsWordpress } from "react-icons/bs"
+import { StatefulTooltip } from "baseui/tooltip"
 
 const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
   height: "64px",
@@ -25,7 +27,7 @@ const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
 }))
 
 const Navbar = () => {
-  const { setDisplayPreview, setScenes, setCurrentDesign, currentDesign, scenes } = useDesignEditorContext()
+  const { setScenes, setCurrentDesign, currentDesign, scenes } = useDesignEditorContext()
   const editorType = useEditorType()
   const editor = useEditor()
   const inputFileRef = React.useRef<HTMLInputElement>(null)
@@ -149,7 +151,7 @@ const Navbar = () => {
       } else if (editorType === "PRESENTATION") {
         return parsePresentationJSON()
       } else {
-      return parseVideoJSON()
+        return parseVideoJSON()
       }
     }
   }
@@ -262,9 +264,12 @@ const Navbar = () => {
     // @ts-ignore
     <ThemeProvider theme={DarkTheme}>
       <Container>
-        <div style={{ color: "#ffffff" }}>
-          <Logo size={36} />
-        </div>
+        <StatefulTooltip content="Back to WordPress Admin" placement="right" showArrow returnFocus triggerType="hover">
+          <a href="#" style={{ width: "36px", height: "36px", display: "block" }}>
+            <BsWordpress size={36} style={{ cursor: "pointer", color: "#fff" }} />
+          </a>
+        </StatefulTooltip>
+
         <DesignTitle />
         <Block $style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
           <input
@@ -304,37 +309,12 @@ const Navbar = () => {
           >
             Export
           </Button>
-          <Button
-            size="compact"
-            onClick={() => setDisplayPreview(true)}
-            kind={KIND.tertiary}
-            overrides={{
-              StartEnhancer: {
-                style: {
-                  marginRight: "4px",
-                },
-              },
-            }}
-          >
-            <Play size={24} />
-          </Button>
 
-          <Button
-            size="compact"
-            onClick={() => window.location.replace("https://github.com/layerhub-io/react-design-editor")}
-            kind={KIND.tertiary}
-          >
-            <Github size={24} />
-          </Button>
-
-          <Button
-            style={{ marginLeft: "0.5rem" }}
-            size="compact"
-            onClick={() => window.location.replace("https://editor.layerhub.io")}
-            kind={KIND.primary}
-          >
-            Try PRO
-          </Button>
+          <a href="https://github.com/j7-dev/design-editor" target="_blank">
+            <Button size="compact" kind={KIND.tertiary}>
+              <Github size={24} />
+            </Button>
+          </a>
         </Block>
       </Container>
     </ThemeProvider>
