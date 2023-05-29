@@ -1,6 +1,12 @@
 import { useContext } from "react"
 import { DesignEditorContext } from "~/contexts/DesignEditor"
 
+/**
+ * TODO:delete
+ * setDisplayPreview,
+ * displayPreview,
+ */
+
 const useDesignEditorContext = () => {
   const {
     editorType,
