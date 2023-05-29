@@ -2,9 +2,7 @@ import React from "react"
 import { styled, ThemeProvider, DarkTheme } from "baseui"
 import { Theme } from "baseui/theme"
 import { Button, KIND } from "baseui/button"
-import Logo from "~/components/Icons/Logo"
 import useDesignEditorContext from "~/hooks/useDesignEditorContext"
-import Play from "~/components/Icons/Play"
 import { Block } from "baseui/block"
 import { useEditor } from "@layerhub-io/react"
 import useEditorType from "~/hooks/useEditorType"
@@ -28,8 +26,9 @@ const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
 
 const Navbar = () => {
   const { setScenes, setCurrentDesign, currentDesign, scenes } = useDesignEditorContext()
-  const editorType = useEditorType()
+  const editorType = useEditorType("GRAPHIC")
   const editor = useEditor()
+  console.log("🚀 ~ file: Navbar.tsx:31 ~ Navbar ~ editorType:", editorType)
   const inputFileRef = React.useRef<HTMLInputElement>(null)
 
   const parseGraphicJSON = () => {
@@ -145,6 +144,7 @@ const Navbar = () => {
   }
 
   const makeDownloadTemplate = async () => {
+    // NOTE - 這個JSON匯出沒什麼用 可能可以用來儲存
     if (editor) {
       if (editorType === "GRAPHIC") {
         return parseGraphicJSON()
@@ -156,108 +156,8 @@ const Navbar = () => {
     }
   }
 
-  const loadGraphicTemplate = async (payload: IDesign) => {
-    const scenes = []
-    const { scenes: scns, ...design } = payload
-
-    for (const scn of scns) {
-      const scene: IScene = {
-        name: scn.name,
-        frame: payload.frame,
-        id: scn.id,
-        layers: scn.layers,
-        metadata: {},
-      }
-      const loadedScene = await loadVideoEditorAssets(scene)
-      await loadTemplateFonts(loadedScene)
-
-      const preview = (await editor.renderer.render(loadedScene)) as string
-      scenes.push({ ...loadedScene, preview })
-    }
-
-    return { scenes, design }
-  }
-
-  const loadPresentationTemplate = async (payload: IDesign) => {
-    const scenes = []
-    const { scenes: scns, ...design } = payload
-
-    for (const scn of scns) {
-      const scene: IScene = {
-        name: scn.name,
-        frame: payload.frame,
-        id: scn,
-        layers: scn.layers,
-        metadata: {},
-      }
-      const loadedScene = await loadVideoEditorAssets(scene)
-
-      const preview = (await editor.renderer.render(loadedScene)) as string
-      await loadTemplateFonts(loadedScene)
-      scenes.push({ ...loadedScene, preview })
-    }
-    return { scenes, design }
-  }
-
-  const loadVideoTemplate = async (payload: IDesign) => {
-    const scenes = []
-    const { scenes: scns, ...design } = payload
-
-    for (const scn of scns) {
-      const design: IScene = {
-        name: "Awesome template",
-        frame: payload.frame,
-        id: scn.id,
-        layers: scn.layers,
-        metadata: {},
-        duration: scn.duration,
-      }
-      const loadedScene = await loadVideoEditorAssets(design)
-
-      const preview = (await editor.renderer.render(loadedScene)) as string
-      await loadTemplateFonts(loadedScene)
-      scenes.push({ ...loadedScene, preview })
-    }
-    return { scenes, design }
-  }
-
-  const handleImportTemplate = React.useCallback(
-    async (data: any) => {
-      let template
-      if (data.type === "GRAPHIC") {
-        template = await loadGraphicTemplate(data)
-      } else if (data.type === "PRESENTATION") {
-        template = await loadPresentationTemplate(data)
-      } else if (data.type === "VIDEO") {
-        template = await loadVideoTemplate(data)
-      }
-      //   @ts-ignore
-      setScenes(template.scenes)
-      //   @ts-ignore
-      setCurrentDesign(template.design)
-    },
-    [editor]
-  )
-
-  const handleInputFileRefClick = () => {
-    inputFileRef.current?.click()
-  }
-
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files![0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = (res) => {
-        const result = res.target!.result as string
-        const design = JSON.parse(result)
-        handleImportTemplate(design)
-      }
-      reader.onerror = (err) => {
-        console.log(err)
-      }
-
-      reader.readAsText(file)
-    }
+  const handleDownload = () => {
+    // TODO 需要實作CANVAS DOWNLOAD
   }
 
   return (
@@ -272,17 +172,9 @@ const Navbar = () => {
 
         <DesignTitle />
         <Block $style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
-          <input
-            multiple={false}
-            onChange={handleFileInput}
-            type="file"
-            id="file"
-            ref={inputFileRef}
-            style={{ display: "none" }}
-          />
           <Button
             size="compact"
-            onClick={handleInputFileRefClick}
+            onClick={handleDownload}
             kind={KIND.tertiary}
             overrides={{
               StartEnhancer: {
@@ -292,22 +184,7 @@ const Navbar = () => {
               },
             }}
           >
-            Import
-          </Button>
-
-          <Button
-            size="compact"
-            onClick={makeDownloadTemplate}
-            kind={KIND.tertiary}
-            overrides={{
-              StartEnhancer: {
-                style: {
-                  marginRight: "4px",
-                },
-              },
-            }}
-          >
-            Export
+            Download
           </Button>
 
           <a href="https://github.com/j7-dev/design-editor" target="_blank">
