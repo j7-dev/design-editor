@@ -11,6 +11,9 @@ const DesignEditor = () => {
   const editorType = useEditorType()
   const { displayPreview, setDisplayPreview } = useDesignEditorContext()
 
+  return <GraphicEditor />
+
+  // TODO: delete
   return (
     <>
       {displayPreview && <Preview isOpen={displayPreview} setIsOpen={setDisplayPreview} />}
