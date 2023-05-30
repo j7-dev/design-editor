@@ -21,7 +21,7 @@ export default function () {
   const { setCurrentScene, currentScene, setScenes, setCurrentDesign } = useDesignEditorContext()
   const designs = useSelector(selectPublicDesigns)
   const editorType = useEditorType()
-  
+
   const loadGraphicTemplate = async (payload: IDesign): Promise<{ scenes: IScene[]; design: IDesign }> => {
     const scenes: IScene[] = []
     const { scenes: scns, ...design } = payload
@@ -76,17 +76,20 @@ export default function () {
       <Scrollable>
         <div style={{ padding: "0 1.5rem" }}>
           <div style={{ display: "grid", gap: "0.5rem", gridTemplateColumns: "1fr 1fr" }}>
-            {designs
-              .filter((d) => d.type === editorType)
-              .map((design, index) => {
-                return (
-                  <ImageItem
-                    onClick={() => loadDesignById(design.id)}
-                    key={index}
-                    preview={`${design.previews[0].src}?tr=w-320`}
-                  />
-                )
-              })}
+            {
+              // TODO 設定DESIGN試玩看看
+              designs
+                .filter((d) => d.type === editorType)
+                .map((design, index) => {
+                  return (
+                    <ImageItem
+                      onClick={() => loadDesignById(design.id)}
+                      key={index}
+                      preview={`${design.previews[0].src}?tr=w-320`}
+                    />
+                  )
+                })
+            }
           </div>
         </div>
       </Scrollable>
