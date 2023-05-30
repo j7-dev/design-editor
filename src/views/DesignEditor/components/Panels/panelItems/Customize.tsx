@@ -1,5 +1,6 @@
 import React from "react"
 import { Button, SIZE } from "baseui/button"
+import { useStyletron } from "baseui"
 import { HexColorPicker } from "react-colorful"
 import { StatefulPopover, PLACEMENT } from "baseui/popover"
 import { Plus } from "baseui/icon"
@@ -15,6 +16,7 @@ import SwapHorizontal from "~/components/Icons/SwapHorizontal"
 import { Tabs, Tab } from "baseui/tabs"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 import useDesignEditorContext from "~/hooks/useDesignEditorContext"
+import { images } from "~/constants/mock-data"
 
 const colors = ["#ffffff", "#9B9B9B", "#4A4A4A", "#000000", "#A70C2C", "#DA9A15", "#F8E71D", "#47821A", "#4990E2"]
 
@@ -35,10 +37,25 @@ const Customize = () => {
       editor.frame.setBackgroundColor(color)
     }
   }
+
   const handleChange = (type: string, value: any) => {
     setState({ ...state, [type]: value })
     changeBackgroundColor(value)
   }
+
+  const addObject = React.useCallback(
+    (url: string) => {
+      if (editor) {
+        const options = {
+          type: "StaticImage",
+          src: url,
+        }
+        // editor.objects.add(options)
+        editor.frame.background(options)
+      }
+    },
+    [editor]
+  )
 
   return (
     <Block $style={{ flex: 1, display: "flex", flexDirection: "column" }}>
@@ -158,10 +175,21 @@ const Customize = () => {
           </Block>
         </Block>
       </Scrollable>
+
+      <Scrollable>
+        <Block padding="0 1.5rem">
+          <div style={{ display: "grid", gap: "8px", gridTemplateColumns: "1fr 1fr" }}>
+            {images.map((image, index) => {
+              return <ImageItem key={index} onClick={() => addObject(image.src.large)} preview={image.src.small} />
+            })}
+          </div>
+        </Block>
+      </Scrollable>
     </Block>
   )
 }
 
+//TODO 之後要調尺寸可以做
 const ResizeTemplate = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   const [activeKey, setActiveKey] = React.useState<string | number>("0")
@@ -359,6 +387,69 @@ const ResizeTemplate = () => {
         </Block>
       </Modal>
     </>
+  )
+}
+
+const ImageItem = ({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) => {
+  const [css] = useStyletron()
+  return (
+    <div
+      onClick={onClick}
+      className={css({
+        position: "relative",
+        background: "#f8f8fb",
+        cursor: "pointer",
+        borderRadius: "8px",
+        overflow: "hidden",
+        "::before:hover": {
+          opacity: 1,
+        },
+      })}
+    >
+      <div
+        className={css({
+          backgroundImage: `linear-gradient(to bottom,
+          rgba(0, 0, 0, 0) 0,
+          rgba(0, 0, 0, 0.006) 8.1%,
+          rgba(0, 0, 0, 0.022) 15.5%,
+          rgba(0, 0, 0, 0.047) 22.5%,
+          rgba(0, 0, 0, 0.079) 29%,
+          rgba(0, 0, 0, 0.117) 35.3%,
+          rgba(0, 0, 0, 0.158) 41.2%,
+          rgba(0, 0, 0, 0.203) 47.1%,
+          rgba(0, 0, 0, 0.247) 52.9%,
+          rgba(0, 0, 0, 0.292) 58.8%,
+          rgba(0, 0, 0, 0.333) 64.7%,
+          rgba(0, 0, 0, 0.371) 71%,
+          rgba(0, 0, 0, 0.403) 77.5%,
+          rgba(0, 0, 0, 0.428) 84.5%,
+          rgba(0, 0, 0, 0.444) 91.9%,
+          rgba(0, 0, 0, 0.45) 100%)`,
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          opacity: 0,
+          transition: "opacity 0.3s ease-in-out",
+          height: "100%",
+          width: "100%",
+          ":hover": {
+            opacity: 1,
+          },
+        })}
+      />
+      <img
+        src={preview}
+        className={css({
+          width: "100%",
+          height: "100%",
+          objectFit: "contain",
+          pointerEvents: "none",
+          verticalAlign: "middle",
+        })}
+      />
+    </div>
   )
 }
 

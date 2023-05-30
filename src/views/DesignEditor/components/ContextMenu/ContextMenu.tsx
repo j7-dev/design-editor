@@ -144,7 +144,7 @@ const ContextMenu = () => {
           >
             <SendToBack size={24} />
           </ContextMenuItem>
-          <ContextMenuItem
+          {/* TODO 不知道怎麼用 <ContextMenuItem
             onClick={() => {
               handleAsComponentHandler()
               editor.cancelContextMenuRequest()
@@ -153,7 +153,7 @@ const ContextMenu = () => {
             label="Save as component"
           >
             <Elements size={24} />
-          </ContextMenuItem>
+          </ContextMenuItem> */}
           <div style={{ margin: "0.5rem 0" }} />
           <ContextMenuItem
             onClick={() => {
