@@ -9,6 +9,7 @@ import { graphics } from "~/constants/mock-data"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 
 const Elements = () => {
+  console.log("graphics", graphics)
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()
 

@@ -1,3 +1,12 @@
+import img1 from "~/assets/images/1.jpg"
+import img2 from "~/assets/images/2.jpg"
+import img3 from "~/assets/images/3.jpg"
+import img4 from "~/assets/images/4.jpg"
+import img5 from "~/assets/images/5.jpg"
+import img6 from "~/assets/images/6.jpg"
+import img7 from "~/assets/images/7.jpg"
+import img8 from "~/assets/images/8.jpg"
+
 export const graphics = [
   {
     left: 0,
@@ -12,7 +21,7 @@ export const graphics = [
     path: [["M", 60, 0], ["L", 0, 0], ["L", 0, 60], ["L", 60, 60], ["L", 60, 0], ["Z"]],
     fill: "#CBCBCB",
     metadata: {},
-    preview: "https://ik.imagekit.io/scenify/1635011325399_603749.png",
+    preview: img1,
     id: "E2mcHFkwGA-MTJcfl3Abs",
   },
   {
@@ -29,7 +38,7 @@ export const graphics = [
     fill: "#CBCBCB",
     metadata: {},
     id: "SY15tkntkk8S1PudoMfRI",
-    preview: "https://ik.imagekit.io/scenify/1635011631415_820612.png",
+    preview: img2,
   },
   {
     left: 0,
@@ -67,7 +76,7 @@ export const graphics = [
     ],
     fill: "#CBCBCB",
     metadata: {},
-    preview: "https://ik.imagekit.io/scenify/1635014101144_519480.png",
+    preview: img3,
     id: "9VWsxoB_O8LSAkCIRjNFY",
   },
   {
@@ -134,7 +143,7 @@ export const graphics = [
     ],
     fill: "#CBCBCB",
     metadata: {},
-    preview: "https://ik.imagekit.io/scenify/1635014130664_615881.png",
+    preview: img4,
     id: "fRmRlanl-hydswssHKhn6",
   },
   {
@@ -217,7 +226,7 @@ export const graphics = [
     ],
     fill: "#CBCBCB",
     metadata: {},
-    preview: "https://ik.imagekit.io/scenify/1635014150489_628269.png",
+    preview: img5,
     id: "A8WLbfJFV1D58X1RUZADd",
   },
   {
@@ -304,7 +313,7 @@ export const graphics = [
     ],
     fill: "#CBCBCB",
     metadata: {},
-    preview: "https://ik.imagekit.io/scenify/1635014314495_390592.png",
+    preview: img6,
     id: "0dwJMLuw8DK9jddPSapOV",
   },
   {
@@ -348,7 +357,7 @@ export const graphics = [
     ],
     fill: "#CBCBCB",
     metadata: {},
-    preview: "https://ik.imagekit.io/scenify/1635014323800_275038.png",
+    preview: img7,
     id: "3w9KPQbyeUe3kgtwpMZx4",
   },
   {
@@ -481,19 +490,9 @@ export const graphics = [
     ],
     fill: "#CBCBCB",
     metadata: {},
-    preview: "https://ik.imagekit.io/scenify/1635014340531_452464.png",
+    preview: img8,
     id: "vAE3f8-4M0-2j5PF04cVY",
   },
-]
-
-export const vectors = [
-  "https://ik.imagekit.io/scenify/001-hug.svg",
-  "https://ik.imagekit.io/scenify/002-date.svg",
-  "https://ik.imagekit.io/scenify/003-happy.svg",
-  "https://ik.imagekit.io/scenify/005-date.svg",
-  "https://ik.imagekit.io/scenify/006-sleep.svg",
-  "https://ik.imagekit.io/scenify/007-hug.svg",
-  "https://ik.imagekit.io/scenify/008-sleep.svg",
 ]
 
 export const images = [

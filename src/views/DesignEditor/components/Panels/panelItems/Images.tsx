@@ -7,6 +7,7 @@ import { images } from "~/constants/mock-data"
 import { useEditor } from "@layerhub-io/react"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 
+// TODO 可以跟純色背景做在一起
 const Images = () => {
   const editor = useEditor()
   const setIsSidebarOpen = useSetIsSidebarOpen()

@@ -9,7 +9,6 @@ import Images from "./Images"
 import Videos from "./Videos"
 import Layers from "./Layers"
 import Elements from "./Elements"
-import Graphics from "./Graphics"
 import TextFill from "./TextFill"
 import PathFill from "./PathFill"
 import CanvasFill from "./CanvasFill"
@@ -25,7 +24,6 @@ export default {
   Images: Images,
   Videos: Videos,
   Elements: Elements,
-  Graphics: Graphics,
   Layers: Layers,
   TextFill: TextFill,
   PathFill: PathFill,
