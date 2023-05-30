@@ -20,7 +20,7 @@ const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
 
 interface Options {
   zoomRatio: number
-  zoomRatioTemp: number,
+  zoomRatioTemp: number
 }
 
 const Common = () => {
@@ -28,7 +28,7 @@ const Common = () => {
   const zoomMax = 240
   const [options, setOptions] = React.useState<Options>({
     zoomRatio: 20,
-    zoomRatioTemp: 20
+    zoomRatioTemp: 20,
   })
   const editor = useEditor()
   const zoomRatio: number = useZoomRatio()
@@ -67,14 +67,14 @@ const Common = () => {
   return (
     <Container>
       <div>
-        <Button kind={KIND.tertiary} size={SIZE.compact}>
+        {/* <Button kind={KIND.tertiary} size={SIZE.compact}>
           <Icons.Layers size={20} />
-        </Button>
+        </Button> */}
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <Button kind={KIND.tertiary} size={SIZE.compact}>
+        {/* <Button kind={KIND.tertiary} size={SIZE.compact}>
           <Icons.Expand size={16} />
-        </Button>
+        </Button> */}
         <Button kind={KIND.tertiary} size={SIZE.compact} onClick={() => editor.zoom.zoomToFit()}>
           <Icons.Compress size={16} />
         </Button>
@@ -167,13 +167,13 @@ const Common = () => {
           size={SIZE.mini}
           max={zoomMax}
           min={zoomMin}
-          onChange={(e) => handleChange("zoomRatioTemp", parseFloat(e.target.value))}
+          onChange={(e) => handleChange("zoomRatio", parseFloat(e.target.value))}
           onKeyUp={(e) => applyZoomRatio("zoomRatio", e)}
-          value={options.zoomRatioTemp}
+          value={options.zoomRatio}
         />
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "end" }}>
-        <Button kind={KIND.tertiary} size={SIZE.compact}>
+        {/* <Button kind={KIND.tertiary} size={SIZE.compact}>
           <Icons.Refresh size={16} />
         </Button>
         <Button kind={KIND.tertiary} size={SIZE.compact}>
@@ -184,7 +184,7 @@ const Common = () => {
         </Button>
         <Button kind={KIND.tertiary} size={SIZE.compact}>
           <Icons.TimePast size={16} />
-        </Button>
+        </Button> */}
       </div>
     </Container>
   )
