@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { styled, ThemeProvider, DarkTheme } from "baseui"
 import { Theme } from "baseui/theme"
 import { Button, KIND } from "baseui/button"
@@ -6,14 +6,12 @@ import useDesignEditorContext from "~/hooks/useDesignEditorContext"
 import { Block } from "baseui/block"
 import { useEditor } from "@layerhub-io/react"
 import useEditorType from "~/hooks/useEditorType"
-import { IScene } from "@layerhub-io/types"
-import { loadTemplateFonts } from "~/utils/fonts"
-import { loadVideoEditorAssets } from "~/utils/video"
 import DesignTitle from "./DesignTitle"
 import { IDesign } from "~/interfaces/DesignEditor"
 import Github from "~/components/Icons/Github"
 import { BsWordpress } from "react-icons/bs"
 import { StatefulTooltip } from "baseui/tooltip"
+import { SlCloudDownload } from "react-icons/sl"
 
 const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
   height: "64px",
@@ -57,6 +55,7 @@ const Navbar = () => {
         scenes: updatedScenes,
         metadata: {},
         preview: "",
+        published: true,
       }
       makeDownload(graphicTemplate)
     } else {
@@ -93,6 +92,7 @@ const Navbar = () => {
         scenes: updatedScenes,
         metadata: {},
         preview: "",
+        published: true,
       }
       makeDownload(presentationTemplate)
     } else {
@@ -127,6 +127,7 @@ const Navbar = () => {
         scenes: updatedScenes,
         metadata: {},
         preview: "",
+        published: true,
       }
       makeDownload(videoTemplate)
     } else {
@@ -145,19 +146,27 @@ const Navbar = () => {
   const makeDownloadTemplate = async () => {
     // NOTE - 這個JSON匯出沒什麼用 可能可以用來儲存
     if (editor) {
-      if (editorType === "GRAPHIC") {
-        return parseGraphicJSON()
-      } else if (editorType === "PRESENTATION") {
-        return parsePresentationJSON()
-      } else {
-        return parseVideoJSON()
-      }
+      return parseGraphicJSON()
     }
   }
 
-  const handleDownload = () => {
-    // TODO 需要實作CANVAS DOWNLOAD
+  const makeDownloadToPNG = (data: Object) => {
+    const dataStr = `${data}`
+    const a = document.createElement("a")
+    a.href = dataStr
+    a.download = `${currentDesign.name || "image"}.png`
+    a.click()
   }
+
+  console.log("editor", editor?.scene?.exportToJSON())
+
+  const exportToPNG = useCallback(async () => {
+    if (editor) {
+      const template = editor.scene.exportToJSON()
+      const image = (await editor.renderer.render(template)) as string
+      makeDownloadToPNG(image)
+    }
+  }, [editor])
 
   return (
     // @ts-ignore
@@ -173,7 +182,7 @@ const Navbar = () => {
         <Block $style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
           <Button
             size="compact"
-            onClick={handleDownload}
+            onClick={exportToPNG}
             kind={KIND.tertiary}
             overrides={{
               StartEnhancer: {
@@ -183,14 +192,15 @@ const Navbar = () => {
               },
             }}
           >
+            <SlCloudDownload style={{ marginRight: "0.5rem" }} />
             Download
           </Button>
 
-          <a href="https://github.com/j7-dev/design-editor" target="_blank">
+          {/* <a href="https://github.com/j7-dev/design-editor" target="_blank">
             <Button size="compact" kind={KIND.tertiary}>
               <Github size={24} />
             </Button>
-          </a>
+          </a> */}
         </Block>
       </Container>
     </ThemeProvider>
