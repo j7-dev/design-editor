@@ -9,6 +9,8 @@ import img8 from "~/assets/images/svg/8.jpg"
 import tp1 from "~/assets/images/templates/tp1.jpeg"
 import tp2 from "~/assets/images/templates/tp2.jpeg"
 import tp3 from "~/assets/images/templates/tp3.jpeg"
+import tp4 from "~/assets/images/templates/tp4.jpeg"
+import tp5 from "~/assets/images/templates/tp5.jpeg"
 
 export const graphics = [
   {
@@ -561,6 +563,50 @@ export const backgroundImages = [
       portrait: tp3,
       landscape: tp3,
       tiny: tp3,
+    },
+    liked: false,
+    alt: "",
+  },
+  {
+    id: 3,
+    width: 1080,
+    height: 1080,
+    url: tp3,
+    photographer: "",
+    photographer_url: "",
+    photographer_id: 0,
+    avg_color: "#8298A9",
+    src: {
+      original: tp3,
+      large2x: tp3,
+      large: tp3,
+      medium: tp3,
+      small: tp3,
+      portrait: tp3,
+      landscape: tp3,
+      tiny: tp3,
+    },
+    liked: false,
+    alt: "",
+  },
+  {
+    id: 4,
+    width: 1080,
+    height: 1080,
+    url: tp4,
+    photographer: "",
+    photographer_url: "",
+    photographer_id: 0,
+    avg_color: "#8298A9",
+    src: {
+      original: tp4,
+      large2x: tp4,
+      large: tp4,
+      medium: tp4,
+      small: tp4,
+      portrait: tp4,
+      landscape: tp4,
+      tiny: tp4,
     },
     liked: false,
     alt: "",

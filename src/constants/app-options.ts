@@ -1,8 +1,8 @@
 export const BASE_ITEMS = [
-  {
-    id: "templates",
-    name: "Templates",
-  },
+  // {
+  //   id: "templates",
+  //   name: "Templates",
+  // },
   {
     id: "customize",
     name: "Customize",
@@ -34,6 +34,6 @@ export const BASE_ITEMS = [
 ]
 
 export enum PanelType {
-  TEMPLATES = "Templates",
+  TEMPLATES = "Customize",
   BACKGROUND = "Background",
 }
