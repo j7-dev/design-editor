@@ -1,11 +1,14 @@
-import img1 from "~/assets/images/1.jpg"
-import img2 from "~/assets/images/2.jpg"
-import img3 from "~/assets/images/3.jpg"
-import img4 from "~/assets/images/4.jpg"
-import img5 from "~/assets/images/5.jpg"
-import img6 from "~/assets/images/6.jpg"
-import img7 from "~/assets/images/7.jpg"
-import img8 from "~/assets/images/8.jpg"
+import img1 from "~/assets/images/svg/1.jpg"
+import img2 from "~/assets/images/svg/2.jpg"
+import img3 from "~/assets/images/svg/3.jpg"
+import img4 from "~/assets/images/svg/4.jpg"
+import img5 from "~/assets/images/svg/5.jpg"
+import img6 from "~/assets/images/svg/6.jpg"
+import img7 from "~/assets/images/svg/7.jpg"
+import img8 from "~/assets/images/svg/8.jpg"
+import tp1 from "~/assets/images/templates/tp1.jpeg"
+import tp2 from "~/assets/images/templates/tp2.jpeg"
+import tp3 from "~/assets/images/templates/tp3.jpeg"
 
 export const graphics = [
   {
@@ -492,6 +495,75 @@ export const graphics = [
     metadata: {},
     preview: img8,
     id: "vAE3f8-4M0-2j5PF04cVY",
+  },
+]
+
+export const backgroundImages = [
+  {
+    id: 1,
+    width: 1080,
+    height: 1080,
+    url: tp1,
+    photographer: "",
+    photographer_url: "",
+    photographer_id: 0,
+    avg_color: "#8298A9",
+    src: {
+      original: tp1,
+      large2x: tp1,
+      large: tp1,
+      medium: tp1,
+      small: tp1,
+      portrait: tp1,
+      landscape: tp1,
+      tiny: tp1,
+    },
+    liked: false,
+    alt: "",
+  },
+  {
+    id: 2,
+    width: 1080,
+    height: 1080,
+    url: tp2,
+    photographer: "",
+    photographer_url: "",
+    photographer_id: 0,
+    avg_color: "#8298A9",
+    src: {
+      original: tp2,
+      large2x: tp2,
+      large: tp2,
+      medium: tp2,
+      small: tp2,
+      portrait: tp2,
+      landscape: tp2,
+      tiny: tp2,
+    },
+    liked: false,
+    alt: "",
+  },
+  {
+    id: 3,
+    width: 1080,
+    height: 1080,
+    url: tp3,
+    photographer: "",
+    photographer_url: "",
+    photographer_id: 0,
+    avg_color: "#8298A9",
+    src: {
+      original: tp3,
+      large2x: tp3,
+      large: tp3,
+      medium: tp3,
+      small: tp3,
+      portrait: tp3,
+      landscape: tp3,
+      tiny: tp3,
+    },
+    liked: false,
+    alt: "",
   },
 ]
 

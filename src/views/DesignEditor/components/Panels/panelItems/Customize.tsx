@@ -16,7 +16,7 @@ import SwapHorizontal from "~/components/Icons/SwapHorizontal"
 import { Tabs, Tab } from "baseui/tabs"
 import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
 import useDesignEditorContext from "~/hooks/useDesignEditorContext"
-import { images } from "~/constants/mock-data"
+import { backgroundImages } from "~/constants/mock-data"
 
 const colors = ["#ffffff", "#9B9B9B", "#4A4A4A", "#000000", "#A70C2C", "#DA9A15", "#F8E71D", "#47821A", "#4990E2"]
 
@@ -32,9 +32,10 @@ const Customize = () => {
     backgroundColor: "#000000",
   })
 
-  const changeBackgroundColor = (color: string) => {
+  const changeBackgroundColor = async (color: string) => {
     if (editor) {
-      editor.frame.setBackgroundColor(color)
+      await editor.objects.unsetBackgroundImage()
+      await editor.frame.setBackgroundColor(color)
     }
   }
 
@@ -44,14 +45,15 @@ const Customize = () => {
   }
 
   const addObject = React.useCallback(
-    (url: string) => {
+    async (image: any) => {
       if (editor) {
         const options = {
           type: "StaticImage",
-          src: url,
+          src: image.url,
         }
-        // editor.objects.add(options)
-        editor.frame.background(options)
+        await editor.objects.unsetBackgroundImage()
+        await editor.objects.add(options)
+        await editor.objects.setAsBackgroundImage()
       }
     },
     [editor]
@@ -179,8 +181,8 @@ const Customize = () => {
       <Scrollable>
         <Block padding="0 1.5rem">
           <div style={{ display: "grid", gap: "8px", gridTemplateColumns: "1fr 1fr" }}>
-            {images.map((image, index) => {
-              return <ImageItem key={index} onClick={() => addObject(image.src.large)} preview={image.src.small} />
+            {backgroundImages.map((image, index) => {
+              return <ImageItem key={image.id} onClick={() => addObject(image)} preview={image.url} />
             })}
           </div>
         </Block>

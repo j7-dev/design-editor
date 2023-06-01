@@ -158,8 +158,6 @@ const Navbar = () => {
     a.click()
   }
 
-  console.log("editor", editor?.scene?.exportToJSON())
-
   const exportToPNG = useCallback(async () => {
     if (editor) {
       const template = editor.scene.exportToJSON()

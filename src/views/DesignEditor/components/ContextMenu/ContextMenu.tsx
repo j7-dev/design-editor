@@ -24,8 +24,8 @@ const ContextMenu = () => {
   if (!contextMenuRequest || !contextMenuRequest.target) {
     return <></>
   }
-
-  if (contextMenuRequest.target.type === "Background") {
+  console.log("contextMenuRequest.target.type", contextMenuRequest.target.type)
+  if (contextMenuRequest.target.type === "Background" || contextMenuRequest.target.type === "BackgroundImage") {
     return (
       <div // @ts-ignore
         onContextMenu={(e: Event) => e.preventDefault()}
